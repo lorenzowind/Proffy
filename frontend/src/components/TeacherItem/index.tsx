@@ -4,32 +4,42 @@ import whatsappIcon from '../../assets/icons/whatsapp.svg';
 
 import './styles.css';
 
-function TeacherItem() {
+export interface Teacher {
+  id: number;
+  avatar: string;
+  bio: string;
+  cost: number;
+  name: string;
+  subject: string;
+  whatsapp: string;
+}
+
+interface TeacherItemProps {
+  teacher: Teacher;
+}
+
+const TeacherItem:React.FC<TeacherItemProps> = ({ teacher }) => {
   return (
     <article className="teacher-item">
     <header>
-      <img src="https://avatars3.githubusercontent.com/u/48891746?s=460&u=c53ef00e81830ae2549ded78efff6a68c2c97f10&v=4" alt="Avatar"/>
+      <img src={teacher.avatar} alt={teacher.name}/>
       <div>
-        <strong>Lorenzo Windmoller</strong>
-        <span>Física</span>
+        <strong>{teacher.name}</strong>
+        <span>{teacher.subject}</span>
       </div>
     </header>
 
-    <p>
-      Entusiasta da Física tradicional clássica
-      <br/>
-      Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica.
-    </p>
+    <p>{teacher.bio}</p>
 
     <footer>
       <p>
         Preço/hora
-        <strong>R$20,00</strong>
+        <strong>R$ {teacher.cost}</strong>
       </p>
-      <button type="button">
+      <a href={`https://wa.me/${teacher.whatsapp}`}>
         <img src={whatsappIcon} alt="Whatsapp"/>
         Entrar em contato
-      </button>
+      </a>
     </footer>
   </article>
   );
